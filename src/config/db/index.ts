@@ -1,6 +1,6 @@
-import 'dotenv/config'
-import { drizzle } from "drizzle-orm/mysql2";
-import mysql from 'mysql2/promise'
+import 'dotenv/config';
+import { drizzle } from 'drizzle-orm/mysql2';
+import mysql from 'mysql2/promise';
 
 // const connection = await mysql.createConnection({
 //   host: process.env.DB_HOST || 'localhost',
@@ -10,4 +10,9 @@ import mysql from 'mysql2/promise'
 //   database: process.env.DB_URL,
 // })
 
-export const db = drizzle({connection: {uri : process.env.DB_URL}})
+export const db = drizzle({ connection: { uri: process.env.DB_URL } });
+
+export const getDB = () => {
+  if (!db) throw new Error('Database not connected');
+  return db;
+};
